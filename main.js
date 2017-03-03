@@ -1,11 +1,12 @@
+var pageCounter = 1;
 var nameContainer = document.getElementById("name-info");
 var btn = document.getElementById("btn");
 
-btn.addEventListener("click", function() 
+btn.addEventListener("click", function()
 {
 	var ourRequest = new XMLHttpRequest();
 	ourRequest.open('GET', 'http://ip-api.com/json');
-	ourRequest.onload = function() 
+	ourRequest.onload = function()
 		{
 			var ourData = JSON.parse(ourRequest.responseText);
 			renderHTML(ourData);
@@ -18,6 +19,10 @@ function renderHTML(data) {
 		htmlString += "<p> country: " + data.country + "</p>";
 		htmlString += "<p> country code: " + data.countryCode + "</p>";
 		htmlString += "<p> country code: " + data.query + "</p>";
+		pageCounter++;
+	if (pageCounter >1) {
+		btn.classList.add("hide-me");
+}
 
 	nameContainer.insertAdjacentHTML('beforeend', htmlString);
 }
